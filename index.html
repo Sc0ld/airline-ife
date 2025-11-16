@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head:
+    <meta charset="UTF-8" />
+    <title>Airline In-Flight System</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app">
+        <!-- Top header -->
+        <header class="top-bar">
+            <div class="logo">
+                <span class="logo-mark">✈</span>
+                <span class="logo-text">SKYLINE AIR</span>
+            </div>
+            <div class="flight-info">
+                <div class="flight-line">
+                    <span class="label">Flight</span>
+                    <span class="value">XY123</span>
+                </div>
+                <div class="flight-line">
+                    <span class="label">Route</span>
+                    <span class="value">Riyadh (RUH) → London (LHR)</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main layout -->
+        <div class="main-layout">
+            <!-- Left navigation -->
+            <nav class="side-nav">
+                <button class="nav-item active" data-section="home">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-label">Home</span>
+                </button>
+                <button class="nav-item" data-section="movies">
+                    <span class="nav-icon">🎬</span>
+                    <span class="nav-label">Movies</span>
+                </button>
+                <button class="nav-item" data-section="games">
+                    <span class="nav-icon">🎮</span>
+                    <span class="nav-label">Games</span>
+                </button>
+            </nav>
+
+            <!-- Content area -->
+            <main class="content-area">
+                <!-- HOME SECTION -->
+                <section id="section-home" class="section active">
+                    <div class="home-hero">
+                        <div class="home-text">
+                            <h1>Welcome on board</h1>
+                            <p>
+                                Relax, choose a movie, or challenge three virtual players
+                                in our Uno card game. This is your personal in-flight
+                                entertainment system.
+                            </p>
+                            <div class="home-badges">
+                                <span class="badge">HD Movies</span>
+                                <span class="badge">Casual Games</span>
+                                <span class="badge">Offline Demo</span>
+                            </div>
+                        </div>
+                        <div class="home-card">
+                            <div class="home-card-title">Next destination</div>
+                            <div class="home-card-body">
+                                <div class="home-destination">London, United Kingdom</div>
+                                <div class="home-meta">
+                                    <span>Flight time: 6h 25m (demo)</span>
+                                    <span>Local time: 14:30 (demo)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MOVIES SECTION -->
+                <section id="section-movies" class="section">
+                    <div class="section-header">
+                        <h2>Movies</h2>
+                        <p>Select a title from the list to start watching.</p>
+                    </div>
+                    <div class="section-body movies-layout">
+                        <aside class="sidebar">
+                            <h3 class="sidebar-title">Available titles</h3>
+                            <ul id="movie-list" class="list">
+                                <!-- Filled by JS -->
+                            </ul>
+                        </aside>
+                        <div class="movies-player-area">
+                            <video id="video-player" controls></video>
+                            <div class="now-playing" id="now-playing">
+                                Select a movie to start
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GAMES SECTION -->
+                <section id="section-games" class="section">
+                    <div class="section-header">
+                        <h2>Games</h2>
+                        <p>Challenge AI players in a simple Uno-style card game.</p>
+                    </div>
+                    <div class="section-body games-layout">
+                        <aside class="sidebar">
+                            <h3 class="sidebar-title">Games</h3>
+                            <ul id="game-list" class="list">
+                                <!-- Filled by JS -->
+                            </ul>
+                        </aside>
+
+                        <div class="games-area">
+                            <div id="game-placeholder" class="game-placeholder">
+                                Select a game from the left panel to start playing.
+                            </div>
+
+                            <!-- UNO GAME -->
+                            <div id="uno-game" class="uno hidden">
+                                <div class="uno-top-bar">
+                                    <div class="uno-status">
+                                        <div id="uno-turn-label" class="uno-turn-label">
+                                            Your turn
+                                        </div>
+                                        <div id="uno-info-label" class="uno-info-label">
+                                            Match color or number to play.
+                                        </div>
+                                    </div>
+                                    <div class="uno-controls">
+                                        <button id="uno-draw-btn">Draw card</button>
+                                        <button id="uno-reset-btn">Restart game</button>
+                                    </div>
+                                </div>
+
+                                <div class="uno-table">
+                                    <!-- Top AI player -->
+                                    <div class="uno-row uno-row-top">
+                                        <div class="uno-player" id="uno-player-1">
+                                            <div class="uno-player-name">AI North</div>
+                                            <div class="uno-player-cards" id="uno-player-1-cards"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Middle row: AI West, center pile, AI East -->
+                                    <div class="uno-row uno-row-middle">
+                                        <div class="uno-player" id="uno-player-2">
+                                            <div class="uno-player-name">AI West</div>
+                                            <div class="uno-player-cards" id="uno-player-2-cards"></div>
+                                        </div>
+
+                                        <div class="uno-center">
+                                            <div class="uno-pile">
+                                                <div class="uno-pile-label">Top card</div>
+                                                <div id="uno-top-card" class="uno-card slot"></div>
+                                            </div>
+                                            <div class="uno-deck-info">
+                                                <span id="uno-deck-count">Deck: 0</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="uno-player" id="uno-player-3">
+                                            <div class="uno-player-name">AI East</div>
+                                            <div class="uno-player-cards" id="uno-player-3-cards"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bottom human player -->
+                                    <div class="uno-row uno-row-bottom">
+                                        <div class="uno-player human" id="uno-player-0">
+                                            <div class="uno-player-name">You</div>
+                                            <div
+                                                class="uno-player-cards uno-player-cards-human"
+                                                id="uno-player-0-cards"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="uno-message" class="uno-message"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
